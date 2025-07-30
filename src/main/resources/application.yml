@@ -8,8 +8,8 @@ spring:
     name: achpaudel-api
   
   datasource:
-    url: jdbc:mysql://ducksworth.iad1-mysql-e2-1b.dreamhost.com:3306/achpaudeldb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&requireSSL=false&verifyServerCertificate=false
-    username: achpaudeldb
+    url: jdbc:mysql://ducksworth.iad1-mysql-e2-1b.dreamhost.com:3306/achpaudel_api?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC&requireSSL=false&verifyServerCertificate=false
+    username: api_achpaudel
     password: kansasolathe
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:

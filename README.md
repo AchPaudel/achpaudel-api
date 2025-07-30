@@ -25,8 +25,8 @@ A comprehensive Spring Boot API server for personal projects and portfolio manag
 
 The application is configured to connect to your DreamHost MySQL server:
 - **Server**: ducksworth.iad1-mysql-e2-1b.dreamhost.com
-- **Database**: achpaudeldb
-- **Username**: achpaudeldb
+- **Database**: achpaudel_api
+- **Username**: api_achpaudel
 
 ## API Endpoints
 
