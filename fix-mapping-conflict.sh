@@ -1,3 +1,9 @@
+#!/bin/bash
+
+echo "🔧 Fixing Spring Boot mapping conflict..."
+
+# Update ApiController to remove the conflicting /v1/projects endpoint
+cat > src/main/java/com/achpaudel/api/controller/ApiController.java << 'JAVA_EOF'
 package com.achpaudel.api.controller;
 
 import com.achpaudel.api.dto.ApiResponse;
@@ -71,3 +77,9 @@ public class ApiController {
         return ResponseEntity.ok(response);
     }
 }
+JAVA_EOF
+
+echo "✅ Mapping conflict fixed!"
+echo "📋 Endpoints are now properly separated:"
+echo "   - ApiController: /v1/health, /v1/info, /v1/status"
+echo "   - ProjectController: /v1/projects/*"
