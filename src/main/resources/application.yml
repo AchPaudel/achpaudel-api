@@ -9,7 +9,7 @@ spring:
   
   datasource:
     url: jdbc:mysql://ducksworth.iad1-mysql-e2-1b.dreamhost.com:3306/achpaudeldb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    username: achpaudeldb
+    username: webuserapi
     password: kansasolathe
     driver-class-name: com.mysql.cj.jdbc.Driver
     
