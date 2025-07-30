@@ -6,7 +6,7 @@ After=network.target
 Type=simple
 User=www-data
 WorkingDirectory=/opt/achpaudel-api
-ExecStart=/usr/bin/java -jar /opt/achpaudel-api/achpaudel-api-1.0.0.jar
+ExecStart=/usr/bin/java -Xmx256m -Xms128m -jar /opt/achpaudel-api/achpaudel-api-1.0.0.jar
 Restart=always
 RestartSec=10
 StandardOutput=journal
@@ -14,8 +14,7 @@ StandardError=journal
 SyslogIdentifier=achpaudel-api
 
 # Environment variables
-Environment="SPRING_PROFILES_ACTIVE=production"
-Environment="JAVA_OPTS=-Xmx512m -Xms256m"
+Environment="JAVA_OPTS=-Xmx256m -Xms128m"
 
 [Install]
-WantedBy=multi-user.target 
+WantedBy=multi-user.target
