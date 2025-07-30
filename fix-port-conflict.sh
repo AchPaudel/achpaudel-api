@@ -1,3 +1,9 @@
+#!/bin/bash
+
+echo "🔧 Fixing port conflict by moving Spring Boot to port 8090..."
+
+# Update application.yml to use port 8090 instead of 8080
+cat > src/main/resources/application.yml << 'YAML_EOF'
 server:
   port: 8090
   servlet:
@@ -65,3 +71,50 @@ app:
   name: Ach Paudel API
   version: 1.0.0
   description: Personal API Server for Ach Paudel
+YAML_EOF
+
+# Update nginx configuration to proxy to port 8090
+cat > nginx.conf << 'NGINX_EOF'
+server {
+    listen 80;
+    server_name api.achpaudel.dev;
+
+    # Security Headers (basic)
+    add_header X-Frame-Options DENY;
+    add_header X-Content-Type-Options nosniff;
+    add_header X-XSS-Protection "1; mode=block";
+
+    # Proxy to Spring Boot Application on port 8090
+    location / {
+        proxy_pass http://localhost:8090;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        
+        # Timeout settings
+        proxy_connect_timeout 30s;
+        proxy_send_timeout 30s;
+        proxy_read_timeout 30s;
+        
+        # Buffer settings
+        proxy_buffering on;
+        proxy_buffer_size 4k;
+        proxy_buffers 8 4k;
+    }
+
+    # Health check endpoint
+    location /health {
+        proxy_pass http://localhost:8090/api/v1/health;
+        access_log off;
+    }
+
+    # Logging
+    access_log /var/log/nginx/api.achpaudel.dev.access.log;
+    error_log /var/log/nginx/api.achpaudel.dev.error.log;
+}
+NGINX_EOF
+
+echo "✅ Port changed to 8090 to avoid conflicts"
+echo "🌐 Your API will be available at: http://api.achpaudel.dev/api"
+echo "🔧 Internal Spring Boot will run on: http://localhost:8090/api"
