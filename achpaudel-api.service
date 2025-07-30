@@ -1,0 +1,21 @@
+[Unit]
+Description=Ach Paudel API Server
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+WorkingDirectory=/opt/achpaudel-api
+ExecStart=/usr/bin/java -jar /opt/achpaudel-api/achpaudel-api-1.0.0.jar
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=achpaudel-api
+
+# Environment variables
+Environment="SPRING_PROFILES_ACTIVE=production"
+Environment="JAVA_OPTS=-Xmx512m -Xms256m"
+
+[Install]
+WantedBy=multi-user.target 
