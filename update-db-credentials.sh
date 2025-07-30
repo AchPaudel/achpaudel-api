@@ -1,3 +1,9 @@
+#!/bin/bash
+
+echo "🔧 Updating database credentials..."
+
+# Update application.yml with correct database credentials
+cat > src/main/resources/application.yml << 'YAML_EOF'
 server:
   port: 8090
   servlet:
@@ -70,3 +76,11 @@ app:
   name: Ach Paudel API
   version: 1.0.0
   description: Personal API Server for Ach Paudel
+YAML_EOF
+
+echo "✅ Database credentials updated!"
+echo "📋 New database configuration:"
+echo "   - Database: achpaudel_api"
+echo "   - Username: api_achpaudel"
+echo "   - Password: kansasolathe (unchanged)"
+echo "   - DDL auto set back to 'update' to create tables"
